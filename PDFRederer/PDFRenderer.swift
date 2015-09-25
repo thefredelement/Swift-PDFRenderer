@@ -54,7 +54,7 @@ class PDFRenderer: NSObject {
         
         for var i = 0; i < allInfo.count; i++ {
             
-            let infoToDraw : NSArray = allInfo.objectAtIndex(i) as NSArray
+            let infoToDraw : NSArray = allInfo.objectAtIndex(i) as! NSArray
             
             for var j = 0; j < numberOfColumns; j++ {
                 
@@ -64,7 +64,7 @@ class PDFRenderer: NSObject {
                 
                 let frame : CGRect = CGRectMake(newOriginX + padding, newOriginY + padding, CGFloat(columnWidth), CGFloat(rowHeight))
                 
-                self.drawText(infoToDraw.objectAtIndex(j) as String, inFrame: frame)
+                self.drawText(infoToDraw.objectAtIndex(j) as! String, inFrame: frame)
             }
             
         }
@@ -105,7 +105,7 @@ class PDFRenderer: NSObject {
         
         let objects : NSArray = NSBundle.mainBundle().loadNibNamed("InvoiceView", owner: nil, options: nil)
         
-        let mainView : UIView = objects.objectAtIndex(0) as UIView
+        let mainView : UIView = objects.objectAtIndex(0) as! UIView
         
         for view in mainView.subviews {
             
@@ -162,13 +162,13 @@ class PDFRenderer: NSObject {
         
         let objects : NSArray = NSBundle.mainBundle().loadNibNamed("InvoiceView", owner: nil, options: nil)
         
-        let mainView : UIView = objects.objectAtIndex(0) as UIView
+        let mainView : UIView = objects.objectAtIndex(0) as! UIView
         
         for view in mainView.subviews {
             
             if view.isKindOfClass(UILabel) {
                 
-                let label : UILabel = view as UILabel
+                let label : UILabel = view as! UILabel
                 
                 self.drawText(label.text!, inFrame: label.frame)
                 

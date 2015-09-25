@@ -51,7 +51,7 @@ class PDFViewController: UIViewController {
         
         let webView : UIWebView = UIWebView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         
-        let url : NSURL = NSURL(fileURLWithPath: pdfFileName)!
+        let url : NSURL = NSURL(fileURLWithPath: pdfFileName)
         let request : NSURLRequest = NSURLRequest(URL: url)
         
         webView.scalesPageToFit = true

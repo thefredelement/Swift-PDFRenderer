@@ -172,6 +172,8 @@
 		601052C01A8D48A800D0772B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Fred Faust";
 				TargetAttributes = {
@@ -425,6 +427,7 @@
 				601052E91A8D48A800D0772B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		601052EA1A8D48A800D0772B /* Build configuration list for PBXNativeTarget "PDFRedererTests" */ = {
 			isa = XCConfigurationList;
@@ -433,6 +436,7 @@
 				601052EC1A8D48A800D0772B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

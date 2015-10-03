@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FWG-3E-p8g">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FWG-3E-p8g">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,7 +17,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gI-By-bNv">
-                                <rect key="frame" x="265" y="285" width="70" height="30"/>
+                                <rect key="frame" x="266" y="285" width="68" height="30"/>
+                                <animations/>
                                 <state key="normal" title="Draw PDF">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -26,6 +27,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="4gI-By-bNv" secondAttribute="centerX" id="avm-ta-5J8"/>
@@ -41,7 +43,7 @@
         <!--View Controller-->
         <scene sceneID="nll-LH-zIY">
             <objects>
-                <viewController id="Hb1-Xb-ZoB" customClass="PDFViewController" customModule="PDFRederer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Hb1-Xb-ZoB" customClass="PDFViewController" customModule="PDFRederer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6ct-fk-LPm"/>
                         <viewControllerLayoutGuide type="bottom" id="LQZ-nX-wSn"/>
@@ -49,8 +51,25 @@
                     <view key="view" contentMode="scaleToFill" id="jbk-iP-UDj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ioe-lP-o5n">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ioe-lP-o5n" firstAttribute="leading" secondItem="jbk-iP-UDj" secondAttribute="leading" id="7eD-N1-SEG"/>
+                            <constraint firstItem="LQZ-nX-wSn" firstAttribute="top" secondItem="ioe-lP-o5n" secondAttribute="bottom" id="UMv-St-gYi"/>
+                            <constraint firstItem="ioe-lP-o5n" firstAttribute="top" secondItem="6ct-fk-LPm" secondAttribute="bottom" id="rbf-Dn-N41"/>
+                            <constraint firstAttribute="trailing" secondItem="ioe-lP-o5n" secondAttribute="trailing" id="zCS-3m-Y2H"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="ioe-lP-o5n" id="LEd-eA-96K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ub5-Ub-mGO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,6 +83,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lcS-CO-Syf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

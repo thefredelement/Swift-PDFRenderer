@@ -10,11 +10,15 @@ import UIKit
 import CoreText
 
 class PDFViewController: UIViewController {
+    
+    //MARK: - Properties
+    @IBOutlet weak var webView: UIWebView!
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         
         let fileName = getPDFFileName()
-        
+
         PDFRenderer().drawPDF(fileName)
         
         showPDFFile()
@@ -29,36 +33,29 @@ class PDFViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - Actions
     func getPDFFileName () -> String {
         
-        let fileName = "invoice.pdf"
+        let fileName = "/invoice.pdf"
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         
-        let pdfFileName = documentsPath.stringByAppendingPathComponent(fileName)
-        
-        return pdfFileName
+        return documentsPath + fileName
         
     }
     
     func showPDFFile() {
         
-        let fileName = "invoice.pdf"
+        let fileName = "/invoice.pdf"
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         
-        let pdfFileName = documentsPath.stringByAppendingPathComponent(fileName)
+        let pdfFileUrl = NSURL(string: documentsPath + fileName)
         
-        let webView : UIWebView = UIWebView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        let request : NSURLRequest = NSURLRequest(URL: pdfFileUrl!)
         
-        let url : NSURL = NSURL(fileURLWithPath: pdfFileName)
-        let request : NSURLRequest = NSURLRequest(URL: url)
-        
-        webView.scalesPageToFit = true
-        webView.loadRequest(request)
-        
-        self.view.addSubview(webView)
-    
+        self.webView.scalesPageToFit = true
+        self.webView.loadRequest(request)
     
     }
 

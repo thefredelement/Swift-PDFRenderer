@@ -76,10 +76,14 @@ class PDFRenderer: NSObject {
         // Create the PDF context using the default page size of 612 x 792
         UIGraphicsBeginPDFContextToFile(filename, CGRectZero, nil)
         
+//        UIGraphicsBeginPDFContextToFile(filename, CGRectMake(0, 0, 612, 792), nil)
+        
+        
+        
         // start a new page
         UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
         
-        self.drawText("Hello World", inFrame: CGRectMake(0, 0, 300, 50))
+//        self.drawText("Hello World", inFrame: CGRectMake(0, 0, 300, 50))
         
         self.drawLabels()
         self.drawLogo()
@@ -126,7 +130,7 @@ class PDFRenderer: NSObject {
         // prepare the text using a core text framesetter
         
         let currentText : CFAttributedStringRef = CFAttributedStringCreate(nil, stringRef, nil)
-        let framesetter : CTFramesetterRef = CTFramesetterCreateWithAttributedString(currentText)
+        let framesetter : CTFramesetterRef      = CTFramesetterCreateWithAttributedString(currentText)
         
         let framePath : CGMutablePathRef = CGPathCreateMutable()
         CGPathAddRect(framePath, nil, frameRect)
@@ -136,17 +140,17 @@ class PDFRenderer: NSObject {
         let currentRange : CFRange = CFRangeMake(0, 0)
         let frameRef : CTFrameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
         
-        let currentContext : CGContextRef = UIGraphicsGetCurrentContext()
+        let currentContext = UIGraphicsGetCurrentContext()!
         
         CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
         
-        // core text draws from teh bottom left corner up so flip the current transform prior to drawing
+        // core text draws from the bottom left corner up so flip the current transform prior to drawing
         
         CGContextTranslateCTM(currentContext, 0, frameRect.origin.y*2)
         CGContextScaleCTM(currentContext, 1.0, -1.0)
-        
+
         CTFrameDraw(frameRef, currentContext)
-        
+
         CGContextScaleCTM(currentContext, 1.0, -1.0)
         CGContextTranslateCTM(currentContext, 0, (-1)*frameRect.origin.y*2)
         
@@ -180,14 +184,14 @@ class PDFRenderer: NSObject {
     
     func drawLineFromPoint(fromPoint from: CGPoint, toPoint to: CGPoint) {
         
-        let context : CGContextRef = UIGraphicsGetCurrentContext()
+        let context : CGContextRef = UIGraphicsGetCurrentContext()!
         CGContextSetLineWidth(context, 2.0)
         
-        let colorSpace : CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()
+        let colorSpace : CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()!
         
         let components = [0.2, 0.2, 0.2, 0.3] as [CGFloat]
         
-        let color : CGColorRef = CGColorCreate(colorSpace, components)
+        let color : CGColorRef = CGColorCreate(colorSpace, components)!
         
         CGContextSetStrokeColorWithColor(context, color)
         

@@ -16,10 +16,8 @@ class PDFRenderer: NSObject {
         for var i = 0; i <= numberOfRows; i++ {
             
             let newOrigin : CGFloat = origin.y + CGFloat(rowHeight * i)
-            
-            let from : CGPoint = CGPointMake(origin.x, newOrigin)
-            
-            let to : CGPoint = CGPointMake(origin.x + CGFloat(numberOfColumns * columnWidth), newOrigin)
+            let from : CGPoint      = CGPointMake(origin.x, newOrigin)
+            let to : CGPoint        = CGPointMake(origin.x + CGFloat(numberOfColumns * columnWidth), newOrigin)
             
             self.drawLineFromPoint(fromPoint: from, toPoint: to)
             
@@ -28,10 +26,8 @@ class PDFRenderer: NSObject {
         for var i = 0; i <= numberOfColumns; i++ {
             
             let newOrigin : CGFloat = origin.x + CGFloat(columnWidth * i)
-            
-            let from : CGPoint = CGPointMake(newOrigin, origin.y)
-            
-            let to : CGPoint = CGPointMake(newOrigin, CGFloat(origin.y + CGFloat(numberOfRows * rowHeight)))
+            let from : CGPoint      = CGPointMake(newOrigin, origin.y)
+            let to : CGPoint        = CGPointMake(newOrigin, CGFloat(origin.y + CGFloat(numberOfRows * rowHeight)))
             
             self.drawLineFromPoint(fromPoint: from, toPoint: to)
             
@@ -43,28 +39,27 @@ class PDFRenderer: NSObject {
         
         let padding : CGFloat = 10
         
-        let headers : NSArray = ["Quantity","Description","Unit Price", "Total", ""]
+        let headers = ["Quantity","Description","Unit Price", "Total", ""]
         
-        let invoiceInfo1 : NSArray = ["1","Development","$1000","$1000",""]
-        let invoiceInfo2 : NSArray = ["1","Development","$1000","$1000",""]
-        let invoiceInfo3 : NSArray = ["1","Development","$1000","$1000",""]
-        let invoiceInfo4 : NSArray = ["1","Development","$1000","$1000",""]
+        let invoiceInfo1  = ["1","Development","$1000","$1000",""]
+        let invoiceInfo2  = ["1","Development","$1000","$1000",""]
+        let invoiceInfo3  = ["1","Development","$1000","$1000",""]
+        let invoiceInfo4  = ["1","Development","$1000","$1000",""]
         
-        let allInfo : NSArray = [headers, invoiceInfo1, invoiceInfo2, invoiceInfo3, invoiceInfo4,]
+        let allInfo = [headers, invoiceInfo1, invoiceInfo2, invoiceInfo3, invoiceInfo4,]
         
         for var i = 0; i < allInfo.count; i++ {
             
-            let infoToDraw : NSArray = allInfo.objectAtIndex(i) as! NSArray
+            let infoToDraw = allInfo[0]
             
             for var j = 0; j < numberOfColumns; j++ {
                 
-                let newOriginX = origin.x + CGFloat(j * columnWidth)
+                let newOriginX      = origin.x + CGFloat(j * columnWidth)
+                let newOriginY      = origin.y + (CGFloat(i + 1) * CGFloat(rowHeight))
+                let frame : CGRect  = CGRectMake(newOriginX + padding, newOriginY + padding, CGFloat(columnWidth), CGFloat(rowHeight))
                 
-                let newOriginY = origin.y + (CGFloat(i + 1) * CGFloat(rowHeight))
+                self.drawText(infoToDraw[j], inFrame: frame)
                 
-                let frame : CGRect = CGRectMake(newOriginX + padding, newOriginY + padding, CGFloat(columnWidth), CGFloat(rowHeight))
-                
-                self.drawText(infoToDraw.objectAtIndex(j) as! String, inFrame: frame)
             }
             
         }
@@ -76,14 +71,8 @@ class PDFRenderer: NSObject {
         // Create the PDF context using the default page size of 612 x 792
         UIGraphicsBeginPDFContextToFile(filename, CGRectZero, nil)
         
-//        UIGraphicsBeginPDFContextToFile(filename, CGRectMake(0, 0, 612, 792), nil)
-        
-        
-        
         // start a new page
         UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
-        
-//        self.drawText("Hello World", inFrame: CGRectMake(0, 0, 300, 50))
         
         self.drawLabels()
         self.drawLogo()
@@ -91,10 +80,10 @@ class PDFRenderer: NSObject {
         let xOrigin = 50
         let yOrigin = 300
         
-        let rowHeight = 50
+        let rowHeight   = 50
         let columnWidth = 120
         
-        let numberOfRows = 7
+        let numberOfRows    = 7
         let numberOfColumns = 4
         
         self.drawTableAt(CGPointMake(CGFloat(xOrigin), CGFloat(yOrigin)), withRowHeight: rowHeight, andColumnWidth: columnWidth, andRowcount: numberOfRows, andColumnCount: numberOfColumns)
@@ -107,9 +96,8 @@ class PDFRenderer: NSObject {
     
     func drawLogo() {
         
-        let objects : NSArray = NSBundle.mainBundle().loadNibNamed("InvoiceView", owner: nil, options: nil)
-        
-        let mainView : UIView = objects.objectAtIndex(0) as! UIView
+        let objects  = NSBundle.mainBundle().loadNibNamed("InvoiceView", owner: nil, options: nil)
+        let mainView = objects[0] as! UIView
         
         for view in mainView.subviews {
             
@@ -128,7 +116,6 @@ class PDFRenderer: NSObject {
         let stringRef : CFStringRef = textToDraw
         
         // prepare the text using a core text framesetter
-        
         let currentText : CFAttributedStringRef = CFAttributedStringCreate(nil, stringRef, nil)
         let framesetter : CTFramesetterRef      = CTFramesetterCreateWithAttributedString(currentText)
         
@@ -136,16 +123,14 @@ class PDFRenderer: NSObject {
         CGPathAddRect(framePath, nil, frameRect)
         
         // get the frame that will do the rendering
-        
-        let currentRange : CFRange = CFRangeMake(0, 0)
-        let frameRef : CTFrameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
+        let currentRange : CFRange  = CFRangeMake(0, 0)
+        let frameRef : CTFrameRef   = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
         
         let currentContext = UIGraphicsGetCurrentContext()!
         
         CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
         
         // core text draws from the bottom left corner up so flip the current transform prior to drawing
-        
         CGContextTranslateCTM(currentContext, 0, frameRect.origin.y*2)
         CGContextScaleCTM(currentContext, 1.0, -1.0)
 
@@ -164,9 +149,8 @@ class PDFRenderer: NSObject {
     
     func drawLabels() {
         
-        let objects : NSArray = NSBundle.mainBundle().loadNibNamed("InvoiceView", owner: nil, options: nil)
-        
-        let mainView : UIView = objects.objectAtIndex(0) as! UIView
+        let objects  = NSBundle.mainBundle().loadNibNamed("InvoiceView", owner: nil, options: nil)
+        let mainView = objects[0] as! UIView
         
         for view in mainView.subviews {
             
@@ -188,7 +172,6 @@ class PDFRenderer: NSObject {
         CGContextSetLineWidth(context, 2.0)
         
         let colorSpace : CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()!
-        
         let components = [0.2, 0.2, 0.2, 0.3] as [CGFloat]
         
         let color : CGColorRef = CGColorCreate(colorSpace, components)!

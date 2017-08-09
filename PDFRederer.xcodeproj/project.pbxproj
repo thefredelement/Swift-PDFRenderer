@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		601052CE1A8D48A800D0772B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601052CD1A8D48A800D0772B /* AppDelegate.swift */; };
-		601052D01A8D48A800D0772B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601052CF1A8D48A800D0772B /* ViewController.swift */; };
 		601052D31A8D48A800D0772B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 601052D11A8D48A800D0772B /* Main.storyboard */; };
 		601052D51A8D48A800D0772B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 601052D41A8D48A800D0772B /* Images.xcassets */; };
 		601052D81A8D48A800D0772B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 601052D61A8D48A800D0772B /* LaunchScreen.xib */; };
@@ -34,7 +33,6 @@
 		601052C81A8D48A800D0772B /* PDFRederer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFRederer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		601052CC1A8D48A800D0772B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		601052CD1A8D48A800D0772B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		601052CF1A8D48A800D0772B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		601052D21A8D48A800D0772B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		601052D41A8D48A800D0772B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		601052D71A8D48A800D0772B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 			children = (
 				601052F31A8E23FE00D0772B /* ray-logo.png */,
 				601052CD1A8D48A800D0772B /* AppDelegate.swift */,
-				601052CF1A8D48A800D0772B /* ViewController.swift */,
 				601052ED1A8D4A2300D0772B /* PDFViewController.swift */,
 				601052D11A8D48A800D0772B /* Main.storyboard */,
 				601052D41A8D48A800D0772B /* Images.xcassets */,
@@ -238,7 +235,6 @@
 			files = (
 				601052EE1A8D4A2300D0772B /* PDFViewController.swift in Sources */,
 				601052F21A8D59A300D0772B /* PDFRenderer.swift in Sources */,
-				601052D01A8D48A800D0772B /* ViewController.swift in Sources */,
 				601052CE1A8D48A800D0772B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

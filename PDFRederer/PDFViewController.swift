@@ -16,21 +16,11 @@ class PDFViewController: UIViewController {
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
-        
-        let fileName = getPDFFileName()
-
-        PDFRenderer().drawPDF(fileName)
-        
-        showPDFFile()
-        
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let fileName = getPDFFileName()
+        PDFRenderer().drawPDF(fileName)
+        showPDFFile()
     }
     
     //MARK: - Actions
@@ -38,7 +28,9 @@ class PDFViewController: UIViewController {
         
         let fileName = "/invoice.pdf"
         
-        let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+        let documentsPath = NSSearchPathForDirectoriesInDomains(
+            FileManager.SearchPathDirectory.documentDirectory,
+            FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
         
         return documentsPath + fileName
         
@@ -48,11 +40,11 @@ class PDFViewController: UIViewController {
         
         let fileName = "/invoice.pdf"
         
-        let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+        let documentsPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
         
-        let pdfFileUrl = NSURL(string: documentsPath + fileName)
+        let pdfFileUrl = URL(string: documentsPath + fileName)
         
-        let request : NSURLRequest = NSURLRequest(URL: pdfFileUrl!)
+        let request : URLRequest = URLRequest(url: pdfFileUrl!)
         
         self.webView.scalesPageToFit = true
         self.webView.loadRequest(request)
